@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Editoriale Dicembre 2025 - Stefano Andrello</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Source Sans Pro', 'Segoe UI', sans-serif;
+            background: linear-gradient(145deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #1a2f3a;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            background: linear-gradient(135deg, #1a2f3a 0%, #2a4a5a 50%, #1a2f3a 100%);
+            color: white;
+            padding: 45px 40px;
+            border-radius: 16px;
+            margin-bottom: 35px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(26, 47, 58, 0.3);
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233fbdb5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        header p {
+            color: #3fbdb5;
+            font-size: 17px;
+            font-weight: 600;
+            position: relative;
+        }
+        header .motto {
+            margin-top: 15px;
+            font-style: italic;
+            opacity: 0.8;
+            font-size: 15px;
+            position: relative;
+        }
+        
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .nav-tab {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .nav-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
+        .nav-tab.active {
+            background: linear-gradient(135deg, #3fbdb5 0%, #2a9d97 100%);
+            color: white;
+        }
+        .nav-tab.weekend {
+            background: linear-gradient(135deg, #e8894a 0%, #d47a3f 100%);
+            color: white;
+        }
+        
+        /* Calendar Overview */
+        .calendar-overview {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        .calendar-overview h2 {
+            font-family: 'Playfair Display', serif;
+            color: #1a2f3a;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3fbdb5;
+            font-size: 24px;
+        }
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        .day-header {
+            text-align: center;
+            font-weight: 700;
+            font-size: 12px;
+            color: #888;
+            padding: 10px 5px;
+            text-transform: uppercase;
+        }
+        .day-cell {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px 8px;
+            min-height: 80px;
+            font-size: 12px;
+            position: relative;
+        }
+        .day-cell.empty {
+            background: transparent;
+        }
+        .day-cell .date {
+            font-weight: 700;
+            color: #1a2f3a;
+            margin-bottom: 5px;
+        }
+        .day-cell a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .day-cell:not(.empty):hover {
+            cursor: pointer;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .day-cell .post-indicator {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 3px;
+            display: block;
+        }
+        .day-cell .post-indicator.linkedin {
+            background: #0077b5;
+            color: white;
+        }
+        .day-cell .post-indicator.facebook {
+            background: #1877f2;
+            color: white;
+        }
+        .day-cell .post-indicator.instagram {
+            background: linear-gradient(135deg, #E4405F 0%, #833AB4 100%);
+            color: white;
+        }
+        .day-cell .post-indicator.weekend {
+            background: linear-gradient(135deg, #e8894a 0%, #d47a3f 100%);
+            color: white;
+        }
+        .day-cell.weekend-day {
+            background: linear-gradient(145deg, #fff3e0 0%, #ffe8cc 100%);
+            border: 2px solid #e8894a;
+        }
+        .day-cell.published {
+            opacity: 0.6;
+        }
+        .day-cell.published::after {
+            content: '✓';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #28a745;
+            color: white;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Section Headers */
+        .section-divider {
+            background: linear-gradient(135deg, #1a2f3a 0%, #2a4a5a 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin: 40px 0 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-divider.weekend {
+            background: linear-gradient(135deg, #e8894a 0%, #d47a3f 100%);
+        }
+        .section-divider h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin: 0;
+        }
+        .section-divider .week-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Post Cards */
+        .post-section {
+            margin-bottom: 25px;
+        }
+        .post-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+        }
+        .post-section h3.linkedin {
+            background: linear-gradient(135deg, #0077b5 0%, #005a8c 100%);
+        }
+        .post-section h3.facebook {
+            background: linear-gradient(135deg, #1877f2 0%, #1466d4 100%);
+        }
+        .post-section h3.instagram {
+            background: linear-gradient(135deg, #E4405F 0%, #C13584 50%, #833AB4 100%);
+        }
+        .post-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            position: relative;
+        }
+        .post-card.weekend-post {
+            border-left: 5px solid #e8894a;
+        }
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eef2f5;
+        }
+        .post-icon {
+            font-size: 38px;
+        }
+        .post-meta {
+            text-align: right;
+        }
+        .post-meta .pillar {
+            background: linear-gradient(135deg, #3fbdb5 0%, #2a9d97 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .post-meta .pillar.weekend {
+            background: linear-gradient(135deg, #e8894a 0%, #d47a3f 100%);
+        }
+        .post-meta .day {
+            color: #888;
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+        .post-meta .day.published {
+            color: #28a745;
+        }
+        .post-content {
+            background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 22px;
+            border-radius: 10px;
+            white-space: pre-line;
+            font-size: 14px;
+            line-height: 1.85;
+            border: 1px solid #eef2f5;
+        }
+        .post-content strong {
+            color: #1a2f3a;
+        }
+        .hashtags {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px dashed #ddd;
+            color: #0077b5;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .tips {
+            background: linear-gradient(145deg, #e8f4f8 0%, #d9eef2 100%);
+            border-left: 4px solid #3fbdb5;
+            padding: 18px;
+            margin-top: 18px;
+            border-radius: 0 10px 10px 0;
+        }
+        .tips.weekend-tips {
+            background: linear-gradient(145deg, #fff3e0 0%, #ffe8cc 100%);
+            border-left-color: #e8894a;
+        }
+        .tips h4 {
+            color: #2a9d97;
+            margin-bottom: 10px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tips.weekend-tips h4 {
+            color: #d47a3f;
+        }
+        .tips ul {
+            margin-left: 18px;
+            font-size: 12px;
+            color: #5a6a7a;
+        }
+        .tips li {
+            margin-bottom: 6px;
+        }
+        .copy-btn {
+            background: linear-gradient(135deg, #3fbdb5 0%, #2a9d97 100%);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            margin-top: 15px;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(63, 189, 181, 0.3);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #1a2f3a 0%, #2a4a5a 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(26, 47, 58, 0.3);
+        }
+        .stats-section h2 {
+            color: #3fbdb5;
+            border-bottom: 3px solid #e8894a;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+        }
+        .stat-item .number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #3fbdb5;
+            display: block;
+        }
+        .stat-item .label {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #1a2f3a 0%, #2a4a5a 100%);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(26, 47, 58, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(26, 47, 58, 0.5);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-size: 14px;
+        }
+        footer strong {
+            color: #1a2f3a;
+        }
+        
+        @media print {
+            body { background: white; }
+            .copy-btn, .nav-tabs { display: none; }
+        }
+        @media (max-width: 768px) {
+            .month-grid { grid-template-columns: repeat(7, 1fr); font-size: 10px; }
+            .day-cell { min-height: 60px; padding: 5px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📅 Piano Editoriale Dicembre 2025</h1>
+            <p>Stefano Andrello | Chairman Noscite | Umanesimo Digitale</p>
+            <div class="motto">"In Digitali Nova Virtus"</div>
+        </header>
+
+        <!-- CALENDARIO MENSILE -->
+        <div class="calendar-overview" id="calendario">
+            <h2>🗓️ Dicembre 2025 — Vista Mensile</h2>
+            <div class="month-grid">
+                <div class="day-header">Lun</div>
+                <div class="day-header">Mar</div>
+                <div class="day-header">Mer</div>
+                <div class="day-header">Gio</div>
+                <div class="day-header">Ven</div>
+                <div class="day-header">Sab</div>
+                <div class="day-header">Dom</div>
+                
+                <div class="day-cell published">
+                    <div class="date">1</div>
+                </div>
+                <div class="day-cell">
+                    <div class="date">2</div>
+                </div>
+                <div class="day-cell">
+                    <div class="date">3</div>
+                </div>
+                <div class="day-cell published" onclick="location.href='#post-4dic'">
+                    <div class="date">4</div>
+                    <span class="post-indicator linkedin">LI</span>
+                </div>
+                <div class="day-cell" onclick="location.href='#post-5dic'">
+                    <div class="date">5</div>
+                    <span class="post-indicator facebook">FB</span>
+                </div>
+                <div class="day-cell weekend-day" onclick="location.href='#post-6dic'">
+                    <div class="date">6</div>
+                    <span class="post-indicator weekend">🐝 W1</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">7</div>
+                </div>
+                
+                <div class="day-cell" onclick="location.href='#post-8dic'">
+                    <div class="date">8</div>
+                    <span class="post-indicator linkedin">LI</span>
+                </div>
+                <div class="day-cell" onclick="location.href='#post-9dic'">
+                    <div class="date">9</div>
+                    <span class="post-indicator facebook">FB</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">10</div>
+                </div>
+                <div class="day-cell" onclick="location.href='#post-11dic'">
+                    <div class="date">11</div>
+                    <span class="post-indicator linkedin">LI</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">12</div>
+                </div>
+                <div class="day-cell weekend-day" onclick="location.href='#post-13dic'">
+                    <div class="date">13</div>
+                    <span class="post-indicator weekend">🗺️ W2</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">14</div>
+                </div>
+                
+                <div class="day-cell" onclick="location.href='#post-15dic'">
+                    <div class="date">15</div>
+                    <span class="post-indicator linkedin">LI</span>
+                </div>
+                <div class="day-cell" onclick="location.href='#post-16dic'">
+                    <div class="date">16</div>
+                    <span class="post-indicator facebook">FB</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">17</div>
+                </div>
+                <div class="day-cell" onclick="location.href='#post-18dic'">
+                    <div class="date">18</div>
+                    <span class="post-indicator linkedin">LI</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">19</div>
+                </div>
+                <div class="day-cell weekend-day" onclick="location.href='#post-20dic'">
+                    <div class="date">20</div>
+                    <span class="post-indicator weekend">🙏 W3</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">21</div>
+                </div>
+                
+                <div class="day-cell" onclick="location.href='#post-22dic'">
+                    <div class="date">22</div>
+                    <span class="post-indicator linkedin">LI</span>
+                </div>
+                <div class="day-cell" onclick="location.href='#post-23dic'">
+                    <div class="date">23</div>
+                    <span class="post-indicator facebook">FB</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">24</div>
+                </div>
+                <div class="day-cell">
+                    <div class="date">25</div>
+                </div>
+                <div class="day-cell">
+                    <div class="date">26</div>
+                </div>
+                <div class="day-cell weekend-day" onclick="location.href='#post-27dic'">
+                    <div class="date">27</div>
+                    <span class="post-indicator weekend">✍️ W4</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">28</div>
+                </div>
+                
+                <div class="day-cell" onclick="location.href='#post-29dic'">
+                    <div class="date">29</div>
+                    <span class="post-indicator linkedin">LI</span>
+                </div>
+                <div class="day-cell">
+                    <div class="date">30</div>
+                </div>
+                <div class="day-cell">
+                    <div class="date">31</div>
+                </div>
+                <div class="day-cell empty"></div>
+                <div class="day-cell empty"></div>
+                <div class="day-cell empty"></div>
+                <div class="day-cell empty"></div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SETTIMANA 1: 4-11 DICEMBRE -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        
+        <div class="section-divider" id="sett1">
+            <h2>📆 Settimana 1</h2>
+            <span class="week-badge">4 — 11 Dicembre</span>
+        </div>
+
+        <!-- LINKEDIN SETTIMANA 1 -->
+        <div class="post-section">
+            <h3 class="linkedin">🔷 LinkedIn — Settimana 1</h3>
+            
+            <!-- LI POST 1 -->
+            <div class="post-card" id="post-4dic">
+                <div class="post-header">
+                    <div class="post-icon">🧠</div>
+                    <div class="post-meta">
+                        <span class="pillar">Epistemia Algoritmica</span>
+                        <div class="day published">Giovedì 4 Dicembre ✓ PUBBLICATO</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>Sapere senza comprendere: il paradosso dell'epistemia algoritmica</strong>
+
+Un sistema di deep learning può identificare un tumore con precisione superiore a quella di un radiologo. Ma se chiediamo perché lo ha riconosciuto, non sa rispondere.
+
+La macchina non spiega: indica.
+
+Questa è l'epistemia algoritmica — una forma di conoscenza che funziona senza giustificarsi. Gli algoritmi apprendono senza sapere perché. Generalizzano senza teoria. Producono risultati senza spiegazione.
+
+È un sapere performativo: valutato in base all'accuratezza, non alla verità.
+
+Il concetto di "vero" sta cedendo il passo a quello di "efficiente". Un sistema è considerato valido nella misura in cui funziona. È il passaggio dalla verità alla prestazione, dal significato al rendimento.
+
+Ma l'efficienza senza senso genera un vuoto epistemico.
+
+Chi decide cosa è giusto conoscere? Chi stabilisce i confini dell'interpretazione?
+
+L'AI, nel suo silenzio logico, non risponde: esegue. L'uomo, per sua natura, non può smettere di chiedere.
+
+Ecco perché parlo di umanesimo digitale — non come nostalgia del passato, ma come riconfigurazione del sapere.
+
+Non si tratta di opporsi alla macchina, ma di reintrodurre l'esperienza nel cuore della conoscenza.
+
+Le macchine producono mappe perfette del mondo. Ma solo l'uomo può chiedersi se conducono nel posto giusto.
+
+Cosa ne pensi? Stiamo delegando troppa conoscenza al calcolo?</div>
+                <div class="hashtags">#UmanesimoDigitale #IntelligenzaArtificiale #AI #EpistemiaAlgoritmica #DigitalTransformation #FuturoDelLavoro</div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+            
+            <!-- LI POST 2 -->
+            <div class="post-card" id="post-8dic">
+                <div class="post-header">
+                    <div class="post-icon">🏭</div>
+                    <div class="post-meta">
+                        <span class="pillar">AI Pratica PMI</span>
+                        <div class="day">Lunedì 8 Dicembre — ore 8:30</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>Il problema non è la tecnologia. È la formazione.</strong>
+
+Solo il 5% delle imprese italiane usa tecnologie AI.
+La media europea è l'8%.
+
+Ma il dato che mi colpisce di più è un altro:
+il 55% delle PMI dichiara di non adottare l'AI per mancanza di competenze.
+
+Non per mancanza di budget.
+Non per mancanza di interesse.
+Per mancanza di competenze.
+
+→ Tradotto: la tecnologia c'è. I soldi si trovano. Ma nessuno sa da dove iniziare.
+
+---
+
+È un problema che vedo ogni giorno.
+
+Imprenditori che comprano software AI "perché bisogna innovare" — senza sapere quale processo automatizzare.
+
+Manager che chiedono "implementiamo ChatGPT" — senza aver mappato dove l'AI può davvero fare la differenza.
+
+Aziende che investono in strumenti — ma non nelle persone che dovrebbero usarli.
+
+---
+
+Il risultato?
+
+Progetti che partono con entusiasmo e muoiono nel giro di sei mesi.
+Soldi spesi. Frustrazione accumulata. Fiducia persa.
+
+E la conclusione sbagliata: "L'AI non funziona per noi."
+
+---
+
+Ma il problema non era l'AI.
+Era l'approccio.
+
+La trasformazione digitale non inizia dalla tecnologia.
+Inizia dalle persone.
+
+Prima capisci il problema.
+Poi formi il team.
+Poi — solo poi — scegli lo strumento.
+
+---
+
+In Noscite lo chiamiamo "In Digitali Nova Virtus": la vera forza del digitale sta nel metodo, non nella magia.
+
+Formare prima di implementare.
+Capire prima di comprare.
+Misurare prima di scalare.
+
+---
+
+Hai vissuto esperienze simili nella tua azienda? Raccontamele nei commenti.</div>
+                <div class="hashtags">#AI #PMI #TrasformazioneDigitale #Innovazione #Formazione #InDigitaliNovaVirtus</div>
+                <div class="tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Questo post ha CTA verso Noscite — monitora click al sito</li>
+                        <li>Perfetto per taggare imprenditori che conosci</li>
+                        <li>Rispondi con casi concreti se qualcuno commenta</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+            
+            <!-- LI POST 3 -->
+            <div class="post-card" id="post-11dic">
+                <div class="post-header">
+                    <div class="post-icon">🌍</div>
+                    <div class="post-meta">
+                        <span class="pillar">Umanesimo Digitale</span>
+                        <div class="day">Giovedì 11 Dicembre — ore 8:30</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>Non cerchiamo una tecnologia più "umana". Cerchiamo un'umanità più capace di abitare la tecnologia.</strong>
+
+Questa frase mi accompagna da anni.
+
+Quando si parla di intelligenza artificiale, il dibattito si polarizza sempre tra due estremi:
+
+→ I tecno-entusiasti: "L'AI risolverà tutto."
+→ I tecno-scettici: "L'AI ci distruggerà."
+
+Ma entrambi commettono lo stesso errore: mettono la tecnologia al centro.
+
+---
+
+L'umanesimo digitale propone un cambio di prospettiva.
+
+Non si tratta di opporsi alla macchina.
+Si tratta di reintrodurre l'esperienza umana nel cuore della conoscenza.
+
+---
+
+L'AI sa calcolare, prevedere, ottimizzare.
+Ma non sa chiedersi: "Ne vale la pena?"
+
+L'AI produce mappe perfette del mondo.
+Ma solo l'uomo può chiedersi se conducono nel posto giusto.
+
+---
+
+Il valore dell'intelligenza umana non sta nella quantità di dati che elabora.
+
+Sta nella capacità di attribuire loro un significato.
+Di trasformare l'informazione in sapienza.
+Di dire "no" quando i numeri dicono "sì".
+
+---
+
+L'umanesimo digitale non è nostalgia del passato.
+È una riconfigurazione del sapere per il futuro.
+
+Non significa rifiutare l'AI.
+Significa usarla senza perdere ciò che ci rende umani:
+
+→ La capacità di dubitare
+→ La capacità di scegliere
+→ La capacità di meravigliarsi
+
+---
+
+Il futuro non è scritto.
+È co-scritto.
+
+E noi siamo ancora gli autori.
+
+---
+
+Cosa significa per te "restare umani" nell'era dell'AI?</div>
+                <div class="hashtags">#UmanesimoDigitale #AI #IntelligenzaArtificiale #Futuro #Innovazione #Leadership</div>
+                <div class="tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Post riflessivo — perfetto per giovedì mattina</li>
+                        <li>Ottimo da condividere anche su Facebook (versione completa)</li>
+                        <li>Può performare bene anche il lunedì mattina</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- FACEBOOK SETTIMANA 1 -->
+        <div class="post-section" id="fb-sett1">
+            <h3 class="facebook">🔵 Facebook — Settimana 1</h3>
+            
+            <div class="post-card" id="post-5dic">
+                <div class="post-header">
+                    <div class="post-icon">🚀</div>
+                    <div class="post-meta">
+                        <span class="pillar">Benvenuto + Vision</span>
+                        <div class="day">Venerdì 5 Dicembre — ore 18:00</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>Un nuovo inizio su questo profilo 🚀</strong>
+
+Da oggi questo spazio cambia un po'.
+
+Continuerò a condividere momenti personali con amici e famiglia, ma aggiungerò qualcosa in più: riflessioni sul mio lavoro, sul futuro dell'intelligenza artificiale e su come possiamo usare la tecnologia senza perdere ciò che ci rende umani.
+
+Mi occupo di trasformazione digitale con Noscite, aiutando aziende e professionisti a capire come l'AI può davvero fare la differenza — non con la magia, ma con metodo.
+
+Ho scritto due libri su questi temi e credo che il dibattito sull'intelligenza artificiale ci riguardi tutti, non solo gli addetti ai lavori.
+
+Una frase che mi guida:
+
+"Le macchine producono mappe perfette del mondo. Ma solo l'uomo può chiedersi se conducono nel posto giusto."
+
+Se questi temi ti interessano, seguimi. Prometto di non annoiarti con tecnicismi incomprensibili 😊
+
+Ci vediamo nel futuro — che scriviamo insieme.</div>
+                <div class="hashtags">#UmanesimoDigitale #AI #Noscite</div>
+                <div class="tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Post di "inaugurazione" del profilo professionale</li>
+                        <li>Tono più caldo e personale rispetto a LinkedIn</li>
+                        <li>Invita amici stretti a commentare per generare engagement iniziale</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+            
+            <div class="post-card" id="post-9dic">
+                <div class="post-header">
+                    <div class="post-icon">💡</div>
+                    <div class="post-meta">
+                        <span class="pillar">Dietro le quinte</span>
+                        <div class="day">Martedì 9 Dicembre — ore 12:30</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>Una cosa che ho imparato questa settimana 💡</strong>
+
+Il 55% delle PMI italiane non adotta l'intelligenza artificiale.
+
+Non per mancanza di soldi.
+Non per mancanza di interesse.
+
+Per mancanza di competenze.
+
+È un dato che mi ha fatto riflettere, perché lo vedo ogni giorno nel mio lavoro con Noscite.
+
+Imprenditori entusiasti che comprano strumenti AI senza sapere come usarli.
+Progetti che partono con grandi aspettative e muoiono in sei mesi.
+E poi la conclusione sbagliata: "L'AI non funziona per noi."
+
+Ma il problema non è mai la tecnologia.
+È sempre l'approccio.
+
+La trasformazione digitale non inizia da un software.
+Inizia dalle persone.
+
+Prima capisci il problema.
+Poi formi il team.
+Poi — solo poi — scegli lo strumento.
+
+"In Digitali Nova Virtus" — la vera forza del digitale sta nel metodo, non nella magia.
+
+Qualcuno di voi ha vissuto esperienze simili in azienda?</div>
+                <div class="hashtags">#AI #PMI #TrasformazioneDigitale</div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- WEEKEND #1: API VS MOSCHE -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        
+        <div class="section-divider weekend" id="weekend1">
+            <h2>🐝 Weekend #1 — Api vs Mosche</h2>
+            <span class="week-badge">Sabato 6 Dicembre</span>
+        </div>
+
+        <!-- LINKEDIN WEEKEND 1 -->
+        <div class="post-section">
+            <h3 class="linkedin">🔷 LinkedIn — Versione Elegante</h3>
+            <div class="post-card weekend-post" id="post-6dic">
+                <div class="post-header">
+                    <div class="post-icon">🐝</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Leadership & Mindset</span>
+                        <div class="day">Sabato 6 Dicembre — ore 10:00</div>
+                    </div>
+                </div>
+                <div class="post-content">Ci sono due tipi di imprenditori: le api e le mosche.
+
+Le api cercano valore, lo selezionano, lo trasformano in qualcosa di migliore. Costruiscono ecosistemi, collaborano, generano miele: creano futuro.
+
+Le mosche, invece, si muovono senza direzione. Non cercano il meglio, si accontentano dello scarto. E sì: spesso finiscono per nutrirsi di ciò che gli altri non vogliono.
+
+La differenza non è nelle risorse, ma nella visione.
+
+Vuoi creare miele o inseguire rumori?</div>
+                <div class="hashtags">#Noscite #UmanesimoDigitale #Leadership #Mindset #Imprenditoria #AI</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Orario consigliato: <strong>sabato mattina 10:00</strong> — engagement più alto</li>
+                        <li>Tono professionale ma provocatorio — perfetto per LinkedIn</li>
+                        <li>La domanda finale invita alla riflessione e ai commenti</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- FACEBOOK WEEKEND 1 -->
+        <div class="post-section">
+            <h3 class="facebook">🔵 Facebook — Versione Diretta</h3>
+            <div class="post-card weekend-post">
+                <div class="post-header">
+                    <div class="post-icon">🪰</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Leadership & Mindset</span>
+                        <div class="day">Sabato 6 Dicembre — ore 11:00</div>
+                    </div>
+                </div>
+                <div class="post-content">Sai qual è la differenza tra un imprenditore ape e un imprenditore mosca?
+
+La prima costruisce un alveare, lavora sul valore, trasforma il nettare in miele.
+
+Il secondo vola senza meta, attratto dalla confusione… e finisce per mangiare merda.
+
+Crudo? Forse.
+Vero? Sempre.
+
+Nel mondo degli affari ci sono due categorie di imprenditori: chi costruisce valore e chi si nutre degli scarti degli altri.
+
+Tu da che parte vuoi stare?</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Orario consigliato: <strong>sabato 11:00</strong> — un'ora dopo LinkedIn</li>
+                        <li>Tono più diretto e colloquiale — Facebook lo permette</li>
+                        <li>La parola "merda" è volutamente provocatoria: genera commenti</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- INSTAGRAM WEEKEND 1 -->
+        <div class="post-section">
+            <h3 class="instagram">📸 Instagram — Versione Incisiva</h3>
+            <div class="post-card weekend-post">
+                <div class="post-header">
+                    <div class="post-icon">⚡</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Leadership & Mindset</span>
+                        <div class="day">Sabato 6 Dicembre — ore 12:00</div>
+                    </div>
+                </div>
+                <div class="post-content">🐝 Ape o 🪰 mosca?
+
+Le api costruiscono.
+Le mosche inseguono.
+
+Le api creano valore.
+Le mosche… si nutrono di ciò che trovano.
+
+👉 Scegli tu chi vuoi essere.</div>
+                <div class="hashtags">#mindset #imprenditori #valore #noscite #growthmindset</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li><strong>RICHIEDE un visual forte</strong> — grafica minimal con ape/mosca</li>
+                        <li>Formato consigliato: carosello o immagine singola impattante</li>
+                        <li>Hashtag: meglio nel primo commento</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SETTIMANA 2: 12-18 DICEMBRE -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        
+        <div class="section-divider" id="sett2">
+            <h2>📆 Settimana 2</h2>
+            <span class="week-badge">12 — 18 Dicembre</span>
+        </div>
+
+        <div class="post-section">
+            <h3 class="linkedin">🔷 LinkedIn — Settimana 2</h3>
+            
+            <div class="post-card" id="post-15dic">
+                <div class="post-header">
+                    <div class="post-icon">🏭</div>
+                    <div class="post-meta">
+                        <span class="pillar">AI Pratica PMI</span>
+                        <div class="day">Lunedì 15 Dicembre — ore 8:30</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>"Il cuscinetto fallirà il 15 dicembre. Prepariamoci."</strong>
+
+Questa frase l'ha detta un sistema di AI predittiva in uno stabilimento manifatturiero.
+
+Non un mago. Non un indovino. Un algoritmo che analizza vibrazioni, temperature, pattern di usura.
+
+Prima dell'AI:
+→ Manutenzione d'emergenza: il cuscinetto si rompe, la linea si ferma, si perde produzione.
+→ Costi imprevisti, stress, ritardi.
+
+Dopo l'AI:
+→ Manutenzione predittiva: si sa in anticipo, si ordina il ricambio, si pianifica l'intervento.
+→ Zero sorprese, zero stress, zero sprechi.
+
+---
+
+Risultato in una PMI reale:
+• -30% fermi macchina non programmati
+• +25% efficienza complessiva
+• Tecnici più sereni (meno emergenze, più pianificazione)
+
+---
+
+Questo è quello che intendo quando parlo di "AI Pratica per le PMI".
+
+Non fantascienza.
+Non promesse vaghe.
+Risultati misurabili su problemi concreti.
+
+---
+
+La domanda non è "serve l'AI nella mia azienda?"
+
+La domanda è: "Quale problema voglio risolvere?"
+
+Parti dal problema. L'AI viene dopo.
+
+---
+
+Nella tua azienda, quale processo trarrebbe più beneficio dalla manutenzione predittiva?</div>
+                <div class="hashtags">#AI #PMI #ManutenzionesPredittiva #Industria40 #TrasformazioneDigitale #InDigitaliNovaVirtus</div>
+                <div class="tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Caso concreto = alta credibilità</li>
+                        <li>Perfetto per taggare contatti nel manifatturiero</li>
+                        <li>Numeri specifici generano più engagement</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+            
+            <div class="post-card" id="post-18dic">
+                <div class="post-header">
+                    <div class="post-icon">📚</div>
+                    <div class="post-meta">
+                        <span class="pillar">Epistemia Algoritmica</span>
+                        <div class="day">Giovedì 18 Dicembre — ore 8:30</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>L'AI non spiega: indica. E noi abbiamo smesso di chiedere perché?</strong>
+
+Un algoritmo mi suggerisce cosa comprare.
+Un altro mi dice quale candidato assumere.
+Un altro ancora mi consiglia quale strada prendere.
+
+Ma nessuno di loro sa spiegarmi perché.
+
+---
+
+Viviamo nell'era della conoscenza algoritmica: sistemi che funzionano senza giustificarsi.
+
+Non c'è teoria. Non c'è spiegazione. C'è solo: "funziona".
+
+E noi, piano piano, abbiamo smesso di chiedere "perché".
+
+---
+
+Eppure il "perché" è ciò che distingue l'informazione dalla comprensione.
+
+Un GPS sa dove andare.
+Ma non sa se vale la pena arrivarci.
+
+Un sistema di raccomandazione sa cosa piace.
+Ma non sa cosa fa bene.
+
+---
+
+La conoscenza algoritmica è performativa: valida perché efficiente.
+
+Ma efficienza senza significato è un sapere vuoto.
+
+---
+
+Non sto dicendo che l'AI sia sbagliata.
+Sto dicendo che abbiamo bisogno di recuperare la domanda.
+
+Il dubbio.
+La curiosità.
+Il coraggio di chiedere "perché" anche quando il sistema risponde solo "funziona".
+
+---
+
+Questo è umanesimo digitale.
+
+Non opporsi alla macchina.
+Reintrodurre l'esperienza umana nel cuore della conoscenza.
+
+---
+
+Quando è stata l'ultima volta che hai chiesto "perché" a un algoritmo?</div>
+                <div class="hashtags">#EpistemiaAlgoritmica #AI #UmanesimoDigitale #PensieroCritico #Innovazione #FuturoDelLavoro</div>
+                <div class="tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Post filosofico — perfetto per giovedì riflessivo</li>
+                        <li>Stimola discussione nei commenti</li>
+                        <li>Ottimo per condivisione su newsletter</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <div class="post-section">
+            <h3 class="facebook">🔵 Facebook — Settimana 2</h3>
+            
+            <div class="post-card" id="post-16dic">
+                <div class="post-header">
+                    <div class="post-icon">🎓</div>
+                    <div class="post-meta">
+                        <span class="pillar">Formazione</span>
+                        <div class="day">Martedì 16 Dicembre — ore 12:30</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>Se il lavoro cambia ogni 5 anni, l'educazione non finisce a 22 anni. Inizia a 22 anni.</strong>
+
+Questa frase mi è rimasta in testa mentre scrivevo il mio ultimo libro.
+
+Pensaci:
+→ Lavori a rischio nei prossimi 10 anni: trasportatori, call center, analisti dati junior, traduttori, copywriter.
+→ Lavori difficili da automatizzare: insegnanti, terapeuti, artigiani, leader.
+
+La differenza? Creatività, empatia, pensiero critico.
+
+Le competenze che nessun algoritmo sa replicare.
+
+---
+
+Allora la domanda diventa: cosa stiamo insegnando ai nostri figli? E cosa stiamo imparando noi?
+
+Se la risposta è "le stesse cose di 20 anni fa"... abbiamo un problema.
+
+In un mondo che cambia ogni 6 mesi, la vera skill è imparare a imparare.
+
+---
+
+Voi come vi state preparando al cambiamento?</div>
+                <div class="hashtags">#Formazione #FuturoDelLavoro #AI #Educazione</div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- WEEKEND #2: MAPPE VS DIREZIONE -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        
+        <div class="section-divider weekend" id="weekend2">
+            <h2>🗺️ Weekend #2 — Mappe vs Direzione</h2>
+            <span class="week-badge">Sabato 13 Dicembre</span>
+        </div>
+
+        <div class="post-section">
+            <h3 class="linkedin">🔷 LinkedIn — Versione Elegante</h3>
+            <div class="post-card weekend-post" id="post-13dic">
+                <div class="post-header">
+                    <div class="post-icon">🗺️</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Umanesimo Digitale</span>
+                        <div class="day">Sabato 13 Dicembre — ore 10:00</div>
+                    </div>
+                </div>
+                <div class="post-content">Le macchine producono mappe perfette del mondo.
+
+Sanno dove sei.
+Sanno dove andare.
+Sanno quanto tempo ci vuole.
+
+Ma c'è una domanda che nessun algoritmo sa fare:
+
+"Vale la pena arrivarci?"
+
+---
+
+Un GPS ottimizza il percorso.
+Ma non sa se la destinazione ha senso.
+
+Un algoritmo ti mostra la strada più efficiente.
+Ma non sa se quella strada ti porterà dove vuoi davvero essere.
+
+---
+
+Viviamo sommersi da mappe perfette.
+Ma abbiamo perso la bussola interiore.
+
+L'efficienza ci dice come.
+Solo l'umanità può dirci perché.
+
+---
+
+Ecco cosa intendo con umanesimo digitale:
+
+Non rifiutare le mappe.
+Ma ricordarsi che la direzione la scegliamo noi.
+
+---
+
+Tu dove stai andando? E perché?</div>
+                <div class="hashtags">#UmanesimoDigitale #Leadership #AI #Innovazione #Mindset #Noscite</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Metafora potente — facile da ricordare e condividere</li>
+                        <li>Domanda finale esistenziale = alto engagement</li>
+                        <li>Ottimo per visual con bussola/mappa</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <div class="post-section">
+            <h3 class="facebook">🔵 Facebook — Versione Diretta</h3>
+            <div class="post-card weekend-post">
+                <div class="post-header">
+                    <div class="post-icon">🧭</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Umanesimo Digitale</span>
+                        <div class="day">Sabato 13 Dicembre — ore 11:00</div>
+                    </div>
+                </div>
+                <div class="post-content">Hai mai notato che il GPS sa sempre dove andare, ma non sa mai perché?
+
+Ti dice: "Svolta a destra tra 200 metri."
+Ma non ti chiede: "Sei sicuro di voler arrivare lì?"
+
+---
+
+Ecco il problema della nostra epoca.
+
+Abbiamo mappe perfette.
+Ma abbiamo perso la bussola.
+
+Sappiamo come fare tutto.
+Ma non sappiamo più perché farlo.
+
+---
+
+L'AI ottimizza.
+L'uomo dà significato.
+
+L'AI calcola il percorso più veloce.
+L'uomo decide se vale la pena partire.
+
+---
+
+La prossima volta che un algoritmo ti suggerisce qualcosa, fermati un secondo.
+
+E chiediti: "Ma io... dove voglio davvero andare?"</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Tono colloquiale, domanda diretta</li>
+                        <li>Perfetto per riflessione del weekend</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <div class="post-section">
+            <h3 class="instagram">📸 Instagram — Versione Incisiva</h3>
+            <div class="post-card weekend-post">
+                <div class="post-header">
+                    <div class="post-icon">🧭</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Umanesimo Digitale</span>
+                        <div class="day">Sabato 13 Dicembre — ore 12:00</div>
+                    </div>
+                </div>
+                <div class="post-content">🗺️ Le mappe sanno dove andare.
+🧭 Solo tu sai perché.
+
+L'AI ottimizza il percorso.
+L'uomo sceglie la destinazione.
+
+Non delegare la direzione a un algoritmo.
+
+👉 Dove vuoi davvero arrivare?</div>
+                <div class="hashtags">#mindset #leadership #umanesimodigitale #noscite #purpose</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Visual: immagine con bussola + mappa digitale</li>
+                        <li>Formato carosello con 3 slide funziona bene</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SETTIMANA 3: 19-25 DICEMBRE -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        
+        <div class="section-divider" id="sett3">
+            <h2>📆 Settimana 3</h2>
+            <span class="week-badge">19 — 25 Dicembre</span>
+        </div>
+
+        <div class="post-section">
+            <h3 class="linkedin">🔷 LinkedIn — Settimana 3</h3>
+            
+            <div class="post-card" id="post-22dic">
+                <div class="post-header">
+                    <div class="post-icon">🎯</div>
+                    <div class="post-meta">
+                        <span class="pillar">AI Pratica PMI</span>
+                        <div class="day">Lunedì 22 Dicembre — ore 8:30</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>L'errore più comune delle PMI con l'AI? Partire dalla tecnologia invece che dal problema.</strong>
+
+"Vogliamo implementare ChatGPT."
+"Dobbiamo usare l'intelligenza artificiale."
+"I competitor lo stanno facendo."
+
+Queste sono le frasi che sento più spesso.
+
+E sono tutte sbagliate.
+
+---
+
+L'AI non è un obiettivo. È uno strumento.
+
+E come ogni strumento, funziona solo se sai cosa devi costruire.
+
+---
+
+Quando un imprenditore mi dice "voglio l'AI in azienda", la mia prima domanda è sempre:
+
+"Quale problema vuoi risolvere?"
+
+→ Ridurre i tempi di risposta ai clienti?
+→ Ottimizzare la gestione del magazzino?
+→ Automatizzare la reportistica?
+→ Prevedere i guasti prima che accadano?
+
+---
+
+L'AI è potentissima.
+Ma solo se la punti nella direzione giusta.
+
+Un laser può tagliare l'acciaio.
+Ma se non sai dove puntarlo, brucia solo il tavolo.
+
+---
+
+In Noscite partiamo sempre da qui:
+
+1. Mappiamo i processi
+2. Identifichiamo i colli di bottiglia
+3. Valutiamo dove l'AI può generare valore misurabile
+4. Solo allora scegliamo lo strumento
+
+---
+
+Prima il problema. Poi la soluzione.
+
+Mai il contrario.
+
+---
+
+Nella tua azienda, qual è il processo che ti fa perdere più tempo?</div>
+                <div class="hashtags">#AI #PMI #TrasformazioneDigitale #Innovazione #Noscite #InDigitaliNovaVirtus</div>
+                <div class="tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Post pre-natalizio — tono pratico ma leggero</li>
+                        <li>Domanda finale invita a condividere problemi reali</li>
+                        <li>Ottimo per DM di follow-up</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <div class="post-section">
+            <h3 class="facebook">🔵 Facebook — Settimana 3</h3>
+            
+            <div class="post-card" id="post-23dic">
+                <div class="post-header">
+                    <div class="post-icon">🎄</div>
+                    <div class="post-meta">
+                        <span class="pillar">Personale</span>
+                        <div class="day">Martedì 23 Dicembre — ore 18:00</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>Riflessione pre-natalizia 🎄</strong>
+
+Quest'anno ho parlato molto di intelligenza artificiale.
+
+Di algoritmi, di trasformazione digitale, di futuro del lavoro.
+
+Ma oggi, a pochi giorni da Natale, voglio parlare di qualcos'altro.
+
+---
+
+L'AI sa fare tante cose.
+
+Ma non sa abbracciare.
+Non sa ascoltare davvero.
+Non sa stare in silenzio con qualcuno che ne ha bisogno.
+
+---
+
+In questi giorni di festa, spegniamo un po' gli schermi.
+
+Guardiamoci negli occhi.
+Facciamo domande vere.
+Ascoltiamo le risposte.
+
+---
+
+La tecnologia è uno strumento meraviglioso.
+
+Ma il calore umano non si automatizza.
+
+---
+
+Buone feste a tutti. Ci rivediamo nel 2026 con tante novità! 🎅</div>
+                <div class="tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Post personale — mostra il lato umano</li>
+                        <li>Perfetto per engagement familiare/amicale</li>
+                        <li>Tono caldo, natalizio</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- WEEKEND #3: FEDE ALGORITMICA -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        
+        <div class="section-divider weekend" id="weekend3">
+            <h2>🙏 Weekend #3 — Fede Algoritmica</h2>
+            <span class="week-badge">Sabato 20 Dicembre</span>
+        </div>
+
+        <div class="post-section">
+            <h3 class="linkedin">🔷 LinkedIn — Versione Elegante</h3>
+            <div class="post-card weekend-post" id="post-20dic">
+                <div class="post-header">
+                    <div class="post-icon">🙏</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Epistemia Algoritmica</span>
+                        <div class="day">Sabato 20 Dicembre — ore 10:00</div>
+                    </div>
+                </div>
+                <div class="post-content">La conoscenza algoritmica è una forma di fede.
+
+Ci fidiamo perché funziona.
+Non perché comprendiamo.
+
+---
+
+Quando Netflix ti consiglia un film, non ti spiega perché.
+Quando Spotify crea la tua playlist, non ti dice come.
+Quando l'algoritmo di LinkedIn ti mostra questo post, non ti rivela i criteri.
+
+Eppure ti fidi.
+
+---
+
+È una nuova religione.
+
+Il Dio non è onnisciente. È onnipresente.
+Non giudica. Prevede.
+Non perdona. Ottimizza.
+
+---
+
+Non sto dicendo che sia sbagliato fidarsi.
+
+Sto dicendo che dovremmo essere consapevoli di quanto ci fidiamo.
+
+E di quanto poco chiediamo spiegazioni.
+
+---
+
+La fede religiosa richiede un atto di volontà.
+La fede algoritmica... è silenziosamente inevitabile.
+
+---
+
+Tu quando hai smesso di chiedere "perché"?</div>
+                <div class="hashtags">#EpistemiaAlgoritmica #AI #UmanesimoDigitale #PensieroCritico #Innovazione</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Post provocatorio — stimola riflessione profonda</li>
+                        <li>Parallelo religione/algoritmo molto potente</li>
+                        <li>Aspettati discussioni polarizzate nei commenti</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <div class="post-section">
+            <h3 class="facebook">🔵 Facebook — Versione Diretta</h3>
+            <div class="post-card weekend-post">
+                <div class="post-header">
+                    <div class="post-icon">🤔</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Epistemia Algoritmica</span>
+                        <div class="day">Sabato 20 Dicembre — ore 11:00</div>
+                    </div>
+                </div>
+                <div class="post-content">Ti fidi di più:
+
+A) Di un amico che ti consiglia un ristorante
+B) Di Google Maps con le recensioni
+
+---
+
+Se hai risposto B, benvenuto nel club.
+
+Non è un giudizio. È un'osservazione.
+
+Abbiamo iniziato a fidarci degli algoritmi più che delle persone.
+
+Perché? Perché "funzionano".
+
+Ma "funziona" non significa "è giusto".
+"Funziona" non significa "è vero".
+"Funziona" non significa "fa bene a te".
+
+---
+
+La prossima volta che un algoritmo ti consiglia qualcosa...
+
+Fermati.
+
+E chiediti: "Perché mi fido di questo?"
+
+---
+
+È una domanda scomoda. Ma necessaria.</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Formato "quiz" genera interazione</li>
+                        <li>Domanda provocatoria ma non aggressiva</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <div class="post-section">
+            <h3 class="instagram">📸 Instagram — Versione Incisiva</h3>
+            <div class="post-card weekend-post">
+                <div class="post-header">
+                    <div class="post-icon">🙏</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Epistemia Algoritmica</span>
+                        <div class="day">Sabato 20 Dicembre — ore 12:00</div>
+                    </div>
+                </div>
+                <div class="post-content">Ci fidiamo perché funziona.
+Non perché comprendiamo.
+
+🙏 Questa è la nuova fede.
+
+L'algoritmo non spiega.
+L'algoritmo indica.
+
+E noi seguiamo.
+
+👉 Quando hai smesso di chiedere "perché"?</div>
+                <div class="hashtags">#pensierocritico #ai #algoritmo #consapevolezza #mindset</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Visual: sfondo scuro, testo bianco, minimal</li>
+                        <li>Tone filosofico ma accessibile</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SETTIMANA 4: 26-31 DICEMBRE -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        
+        <div class="section-divider" id="sett4">
+            <h2>📆 Settimana 4</h2>
+            <span class="week-badge">26 — 31 Dicembre</span>
+        </div>
+
+        <div class="post-section">
+            <h3 class="linkedin">🔷 LinkedIn — Settimana 4</h3>
+            
+            <div class="post-card" id="post-29dic">
+                <div class="post-header">
+                    <div class="post-icon">🔮</div>
+                    <div class="post-meta">
+                        <span class="pillar">Leadership & Cultura</span>
+                        <div class="day">Lunedì 29 Dicembre — ore 9:00</div>
+                    </div>
+                </div>
+                <div class="post-content"><strong>Il privilegio di camminare tra filosofia e pratica</strong>
+
+Un anno sta per finire. E con lui, mille riflessioni.
+
+Quest'anno ho avuto il privilegio di fare qualcosa di raro: camminare ogni giorno sul confine tra pensiero e azione.
+
+Da una parte, le domande profonde: cosa significa conoscere nell'era dell'AI? Come restare umani quando le macchine sanno fare quasi tutto?
+
+Dall'altra, i problemi concreti: come aiutare una PMI a digitalizzarsi? Come formare persone che domani useranno strumenti che oggi non esistono?
+
+---
+
+Questo equilibrio è ciò che chiamo "umanesimo digitale".
+
+Non teoria astratta.
+Non pratica cieca.
+Ma un ponte tra le due.
+
+---
+
+Nel 2025, con Noscite, abbiamo:
+
+→ Formato centinaia di professionisti sull'AI
+→ Accompagnato PMI nella trasformazione digitale
+→ Scritto, parlato, discusso di questi temi
+
+Ma soprattutto: abbiamo ascoltato.
+
+---
+
+E ora?
+
+Il 2026 porterà sfide ancora più grandi.
+L'AI evolverà ancora.
+Le domande diventeranno più urgenti.
+
+Ma una cosa non cambierà:
+
+Il futuro non è scritto.
+È co-scritto.
+E noi siamo ancora gli autori.
+
+---
+
+Grazie a chi mi segue, a chi commenta, a chi mi sfida.
+
+Ci vediamo l'anno prossimo. Con la stessa passione. E qualche capello bianco in più. 😊
+
+---
+
+Qual è stata la vostra riflessione più importante del 2025?</div>
+                <div class="hashtags">#Leadership #UmanesimoDigitale #AI #Noscite #Riflessioni #FineAnno</div>
+                <div class="tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Post di bilancio — tono personale e ispiratore</li>
+                        <li>Perfetto per fine anno</li>
+                        <li>Invita a condividere riflessioni personali</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- WEEKEND #4: IL FUTURO NON È SCRITTO -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        
+        <div class="section-divider weekend" id="weekend4">
+            <h2>✍️ Weekend #4 — Il Futuro Non È Scritto</h2>
+            <span class="week-badge">Sabato 27 Dicembre</span>
+        </div>
+
+        <div class="post-section">
+            <h3 class="linkedin">🔷 LinkedIn — Versione Elegante</h3>
+            <div class="post-card weekend-post" id="post-27dic">
+                <div class="post-header">
+                    <div class="post-icon">✍️</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Umanesimo Digitale</span>
+                        <div class="day">Sabato 27 Dicembre — ore 10:00</div>
+                    </div>
+                </div>
+                <div class="post-content">Il futuro non è scritto.
+
+Non è un algoritmo che calcola.
+Non è una previsione che si avvera.
+Non è un destino già deciso.
+
+Il futuro è co-scritto.
+
+---
+
+Ogni scelta che fai oggi è un rigo nel libro di domani.
+Ogni decisione che prendi è un capitolo che si apre.
+Ogni "no" che dici è una strada che si chiude. E un'altra che si apre.
+
+---
+
+L'AI può prevedere.
+Ma non può decidere.
+
+L'AI può suggerire.
+Ma non può scegliere.
+
+L'AI può calcolare probabilità.
+Ma non può immaginare possibilità.
+
+---
+
+In un mondo di algoritmi che sanno tutto, il potere è di chi osa non sapere.
+
+Di chi rischia.
+Di chi sbaglia.
+Di chi ricomincia.
+
+---
+
+Il 2026 non è scritto.
+
+È una pagina bianca.
+E la penna è nella tua mano.
+
+---
+
+Cosa scriverai?</div>
+                <div class="hashtags">#UmanesimoDigitale #Futuro #Leadership #Mindset #Noscite #2026</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Post di fine anno — ispiratore e universale</li>
+                        <li>Metafora della scrittura molto potente</li>
+                        <li>Ottimo per condivisioni e salvataggi</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <div class="post-section">
+            <h3 class="facebook">🔵 Facebook — Versione Diretta</h3>
+            <div class="post-card weekend-post">
+                <div class="post-header">
+                    <div class="post-icon">📖</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Umanesimo Digitale</span>
+                        <div class="day">Sabato 27 Dicembre — ore 11:00</div>
+                    </div>
+                </div>
+                <div class="post-content">C'è chi pensa che il futuro sia già scritto.
+
+Che basta analizzare i dati.
+Che basta seguire le previsioni.
+Che basta affidarsi all'algoritmo.
+
+---
+
+Io non ci credo.
+
+Il futuro non è un libro già stampato.
+È un foglio bianco.
+
+E la penna? È nella tua mano.
+
+---
+
+L'AI può aiutarti a capire dove sei.
+Ma solo tu puoi decidere dove andare.
+
+L'AI può mostrarti le probabilità.
+Ma solo tu puoi creare le possibilità.
+
+---
+
+Il 2026 sta arrivando.
+
+Non aspettare che qualcun altro lo scriva per te.
+
+---
+
+Cosa vuoi che ci sia scritto nel tuo prossimo capitolo?</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Tono motivazionale — perfetto per fine anno</li>
+                        <li>Invita a condividere obiettivi 2026</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <div class="post-section">
+            <h3 class="instagram">📸 Instagram — Versione Incisiva</h3>
+            <div class="post-card weekend-post">
+                <div class="post-header">
+                    <div class="post-icon">✍️</div>
+                    <div class="post-meta">
+                        <span class="pillar weekend">Umanesimo Digitale</span>
+                        <div class="day">Sabato 27 Dicembre — ore 12:00</div>
+                    </div>
+                </div>
+                <div class="post-content">Il futuro non è scritto.
+
+È co-scritto.
+
+📖 L'AI prevede.
+✍️ Tu decidi.
+
+La penna è nella tua mano.
+
+👉 Cosa scriverai nel 2026?</div>
+                <div class="hashtags">#futuro #2026 #mindset #obiettivi #umanesimodigitale #noscite</div>
+                <div class="tips weekend-tips">
+                    <h4>💡 Tips per la pubblicazione</h4>
+                    <ul>
+                        <li>Visual: foglio bianco con penna, sfondo minimal</li>
+                        <li>Formato carosello: "Non è scritto → È co-scritto → Tu sei l'autore"</li>
+                    </ul>
+                </div>
+                <button class="copy-btn" onclick="copyPost(this)">📋 Copia testo</button>
+            </div>
+        </div>
+
+        <!-- STATISTICHE -->
+        <div class="stats-section">
+            <h2>📊 Riepilogo Dicembre 2025</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="number">8</span>
+                    <span class="label">Post LinkedIn</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">6</span>
+                    <span class="label">Post Facebook</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">4</span>
+                    <span class="label">Post Instagram</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">4</span>
+                    <span class="label">Post Weekend</span>
+                </div>
+            </div>
+            <div style="margin-top: 30px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center;">
+                <div>
+                    <div style="color: #e8894a; font-weight: 700; margin-bottom: 5px;">Pillar 1</div>
+                    <div style="opacity: 0.8; font-size: 13px;">Epistemia Algoritmica: 3 post</div>
+                </div>
+                <div>
+                    <div style="color: #e8894a; font-weight: 700; margin-bottom: 5px;">Pillar 2</div>
+                    <div style="opacity: 0.8; font-size: 13px;">Umanesimo Digitale: 4 post</div>
+                </div>
+                <div>
+                    <div style="color: #e8894a; font-weight: 700; margin-bottom: 5px;">Pillar 3</div>
+                    <div style="opacity: 0.8; font-size: 13px;">AI Pratica PMI: 3 post</div>
+                </div>
+                <div>
+                    <div style="color: #e8894a; font-weight: 700; margin-bottom: 5px;">Pillar 4</div>
+                    <div style="opacity: 0.8; font-size: 13px;">Leadership: 2 post</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PULSANTE TORNA AL CALENDARIO -->
+        <button class="back-to-top" onclick="location.href='#calendario'">
+            📅 Calendario
+        </button>
+
+        <footer>
+            <p><strong>Piano Editoriale Dicembre 2025</strong> | Stefano Andrello</p>
+            <p style="margin-top: 8px; opacity: 0.7;">"In Digitali Nova Virtus" | noscite.it</p>
+            <p style="margin-top: 5px; opacity: 0.5;">Generato il 5 Dicembre 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyPost(btn) {
+            const postContent = btn.parentElement.querySelector('.post-content').innerText;
+            const hashtags = btn.parentElement.querySelector('.hashtags')?.innerText || '';
+            const fullText = postContent + (hashtags ? '\n\n' + hashtags : '');
+            
+            navigator.clipboard.writeText(fullText).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = '✅ Copiato!';
+                btn.style.background = 'linear-gradient(135deg, #28a745 0%, #1e7e34 100%)';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #3fbdb5 0%, #2a9d97 100%)';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
